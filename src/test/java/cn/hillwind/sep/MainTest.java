@@ -13,21 +13,36 @@ import java.io.FileInputStream;
  */
 public class MainTest extends TestCase {
 
+    public static void main(String[] args) throws Exception{
+        new MainTest().test();
+    }
+
     @Test
-//    public static void main(String[] args) throws Exception{
     public void test() throws Exception{
-        File file = new File("/Volumes/src/git/sep/src/test/resources/chuanshu.xlsx");
+        // 需要修改为本地绝对路径, 如：c:/workspace/chuanshu.xlsx
+        String excelFile  = "/Volumes/src/git/sep/src/test/resources/chuanshu.xlsx";
+        String configFile = "/Volumes/src/git/sep/src/test/resources/chuanshu.json";
+
+        File file = new File(excelFile);
+
+        //以只读方式打开Excel文件
         OPCPackage p = OPCPackage.open(file, PackageAccess.READ);
-        //PrintStream ps = new PrintStream(new BufferedOutputStream( new FileOutputStream("/tmp/zs.csv") ) );
         ExcelReader excelReader = new ExcelReader(p);
-        ExcelDescFile excelDescFile = ExcelDescFile.create(new FileInputStream("/Volumes/src/hg/psp/src/main/resources/chuanshu_init.json"));
-        excelDescFile.getOption().setMaxErrorCount(Integer.MAX_VALUE);
-        excelDescFile.getOption().setColumnValidator(new DefaultRegexColumnValidator());
-        ExcelRowHandler<ChuanShuTJB> rowHandler = new ExcelRowHandler<ChuanShuTJB>(excelDescFile, ChuanShuTJB.class);
+
+        //读取Excel列与Java对象属性对应的配置文件
+        ExcelDescFile excelDescFile = ExcelDescFile.create(new FileInputStream(configFile));
+
+        ExcelRowHandler<ChuanShuTJBExport> rowHandler = new ExcelRowHandler<ChuanShuTJBExport>(excelDescFile, ChuanShuTJBExport.class);
+
+        //目前只读取“明细”中的内容
         excelReader.handlers.put("明细", rowHandler);
+
         excelReader.process();
 
-        assertEquals(2,rowHandler.getResult().size());
+        ChuanShuTJBExport export = rowHandler.getResult().get(0);
+        assertEquals(464, rowHandler.getResult().size());
     }
+
+
 
 }

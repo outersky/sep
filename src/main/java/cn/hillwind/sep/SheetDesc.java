@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 
 /**
@@ -126,6 +127,7 @@ public class SheetDesc {
                     }
                 }else{
                     try {
+                        value = normalize(obj,columnDesc,value); // 数据需要预处理一下，因为Excel中数字都是浮点的，不能直接赋值给int/long/short/byte...
                         BeanUtils.setProperty(obj, columnDesc.getName(), value);
                     } catch (Exception e) {
                         excelDescFile.getOption().addError("[" + cell.ref + "] 设置错误 : " + e.getMessage());
@@ -134,6 +136,32 @@ public class SheetDesc {
             }
         }
         return obj;
+    }
+
+    private String normalize(Object obj, ColumnDesc columnDesc, String value) {
+        Class type = null;
+        try {
+            type = PropertyUtils.getPropertyDescriptor(obj, columnDesc.getName()).getPropertyType();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        // 所有整数类的，将小数点后的部分截掉.
+        if(type == Integer.class || type==Integer.TYPE
+                || type == Long.class || type==Long.TYPE
+                || type == Short.class || type==Short.TYPE
+                || type == Byte.class || type==Byte.TYPE ){
+            int i = value.indexOf('.');
+            if(i>=0){
+                return value.substring(0,i);
+            }else{
+                return value;
+            }
+        }
+        return value;
     }
 
     /**

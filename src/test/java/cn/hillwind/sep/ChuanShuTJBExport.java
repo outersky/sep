@@ -1,414 +1,452 @@
 package cn.hillwind.sep;
 
 /**
- * 传输统计表
+ * 传输统计表导出.
+ * 日期类型以Long表示，为毫秒数，可以通过 new Date(longValue)得到一个Date对象。
  */
-public class ChuanShuTJB{
+public class ChuanShuTJBExport {
 
     private static final long serialVersionUID = 1L;
 
-    public static final String ACTION_NEW = "新增";
-    public static final String ACTION_MODIFY = "修改";
+    /**
+     * ID
+     *
+     */
+    private Long id;
 
     /**
-     * 传输编号
-     * （项目编号）
+     * 项目编号
+     *
      */
     private String csbh;
-    
+
+    /**
+     * 册号
+     *
+     */
+    private String fence;
+
     /**
      * 项目名称
-     * 2015-04-21 加
+     *
      */
     private String xmmc;
 
     /**
      * 项目负责人
-     * 2015-04-21 加
+     *
      */
     private String xmfzr;
 
     /**
-     * 分册
-     * (分册编号) 第三册第十五分册 第5册第28分册
-     */
-    private String fence;
-    
-    /**
-     * 分册
-     * 用于排序的册号 如 “第三册第十五分册” -> 0003.0015 ,  "第5册第28分册" -> 0005.0028
-     */
-    private String fenceOrder;
-
-    /**
-     * 册名
-     */
-    private String ceming;
-
-    /**
      * 项目类别
-     * 2015-04-21 加
+     * 二平面、WLAN、专线、基站、室分、市政、其他、骨干层、汇聚层
      */
     private String xmlb;
 
     /**
      * 工程属性
-     * 2015-04-21 由文本框改为下拉框
+     * 管道,光缆,设备,客户端
      */
     private String gcsx;
 
     /**
      * 工单编号
-     * 2015-04-21 加,预留，暂不显示
+     *
      */
     private String gdbh;
 
     /**
-     * 规划编号
-     * \专线编号\加站编号
+     * 专线编号/加站编号
+     *
      */
     private String ghbh;
 
     /**
      * 工单日期
-     * 2015-04-21 加,预留，暂不显示
+     * date
      */
     private Long gdrq;
 
     /**
      * 预警日期
-     * 2015-04-21 加,预留，暂不显示
+     * date
      */
     private Long yjrq;
 
     /**
      * 回单日期
-     * 2015-04-21 加,预留，暂不显示
+     * date
      */
     private Long hdrq;
 
     /**
      * 单项名称
+     *
      */
     private String dxmc;
 
-	/**
+    /**
      * 工程地址
-     * 2015-04-21
+     *
      */
     private String gcdz;
-    
+
     /**
      * 发起单位
-     * (12个属地) 2015-04-21 修改列名为：发起单位,含义不变
+     * 宝山,北区,崇明,奉贤,嘉定,金山,闵行,南汇,南区,浦东,青浦,松江,西区,优化,信息,视频,行政
      */
     private String fqdw;
-    
+
     /**
      * 所属区域
-     * (12个属地)
+     * 宝山,北区,崇明,奉贤,嘉定,金山,闵行,南汇,南区,浦东,青浦,松江,西区,优化,信息,视频,行政
      */
     private String ssqy;
-    
+
     /**
      * 行政区域
-     * 2015-04-21 加
+     * 黄浦,卢湾,静安,徐汇,浦东,长宁,虹口,杨浦,普陀,闸北,闵行,宝山,嘉定,青浦,奉贤,南汇,崇明,金山,松江
      */
     private String xzqy;
 
     /**
      * 集客/属地联系人
-     * 2015-04-21 加,预留，暂不显示
+     *
      */
     private String sdlxr;
 
     /**
      * 集客/属地联系方式
-     * 2015-04-21 加,预留，暂不显示
+     *
      */
     private String sdlxfs;
 
     /**
      * 客户/购租联系人
-     * 2015-04-21 加,预留，暂不显示
+     *
      */
     private String gzlxr;
 
     /**
      * 客户/购租联系方式
-     * 2015-04-21 加,预留，暂不显示
+     *
      */
     private String gzlxfs;
 
     /**
      * 路名
-     * 2015-04-21 加
+     *
      */
     private String luming;
 
     /**
      * 路段
-     * 2015-04-21 加
+     *
      */
     private String luduan;
 
     /**
-     * 长度(米)
+     * 长度（米）
+     *
      */
     private String changdu;
 
     /**
-     * 孔数
+     * 孔数/芯数
+     *
      */
     private String kongshu;
 
     /**
-     * 总投资(元)
+     * 总投资（元）
+     *
      */
     private String ztz;
 
     /**
-     * 工程费
+     * 施工费（元）
+     *
      */
     private String gcf;
 
     /**
-     * 设计费(元)
+     * 设计费（元）
+     *
      */
     private String sjf;
 
     /**
-     * 监理费(元)
+     * 监理费（元）
+     *
      */
     private String jlf;
 
     /**
      * 设计文本送交工程部日期
-     * 2015-04-21 加
+     * date
      */
     private Long sjwbsjgcbrq;
 
     /**
+     * 册名
+     *
+     */
+    private String ceming;
+
+    /**
      * 设计说明备注
-     * 2015-04-21 加
+     *
      */
     private String sjsmbz;
 
-
     /**
-     * 设计院名称
+     * 设计单位名称
+     * 全称
      */
     private String designName;
-    
+
     /**
      * 监理单位名称
+     * 全称
      */
     private String supervisionName;
 
     /**
      * 施工单位名称
+     * 全称
      */
     private String constructionName;
 
     /**
-     * 单项委托时间
+     * 设计单位_PSP_ID
+     * 给管线系统用
+     */
+    private String designCompanyId;
+
+    /**
+     * 监理单位_PSP_ID
+     * 给管线系统用
+     */
+    private String supervisionCompanyId;
+
+    /**
+     * 施工单位_PSP_ID
+     * 给管线系统用
+     */
+    private String constructionCompanyId;
+
+    /**
+     * 设计单位_PMS_REF_ID
+     * 给PMS用
+     */
+    private String designCompanyRefId;
+
+    /**
+     * 监理单位_PMS_REF_ID
+     * 给PMS用
+     */
+    private String supervisionCompanyRefId;
+
+    /**
+     * 施工单位_PMS_REF_ID
+     * 给PMS用
+     */
+    private String constructionCompanyRefId;
+
+    /**
+     * 委托时间
+     * date
      */
     private Long dxwtsj;
 
     /**
      * 是否办理管照
-     * 2015-04-21 加
+     * 是、否
      */
     private String sfblgz;
 
     /**
-     * 备注情况
+     * 备注
+     *
      */
     private String bzqk;
 
     /**
      * 设计文本分发日期
-     * 2015-04-21 加 , 预留（陈鸯填写）
+     * date
      */
     private Long sjwbffrq;
 
     /**
      * 施工情况
-     * (施工单位填写) 2015-04-21 加
+     * 未开工,在建,完工,受阻,无法实施,站点取消
      */
     private String sgqk;
 
     /**
      * 施工情况简述
-     * （含建设情况和竣工资料提交情况） 2015-04-21 加
+     *
      */
     private String sgqkjs;
 
     /**
      * 预计完工时间
-     * 2015-04-21 加，需要由项目负责人指定施工单位时，要求施工单位填写，由项目负责人确认。
+     * date
      */
     private Long yjwgsj;
 
     /**
-     * 开工日期
-     */
-    private Long kgrq;
-
-    /**
-     * 完工日期
+     * 完工时间
+     * date
      */
     private Long wgrq;
 
     /**
      * 竣工资料提交时间
-     * (施工单位)
+     * date
      */
     private Long jgzltjsj;
 
     /**
      * 管照办理情况
-     * 施工单位填写 2015-04-21 加
+     * 办理中,管照已上交,情况说明已上交,无需办理
      */
     private String gzblqk;
 
     /**
      * 施工备注
-     * 2015-04-21 加
+     *
      */
     private String sgbz;
 
     /**
-     * 工程建设情况
-     * (每次监理确认的进度，由ChuanShuProgress表的状态更新至此) 2015-04-21 改名为 施工进度确认
-     */
-    private String gcjsqk;
-
-    /**
-     * 竣工资料确认情况
-     * (监理）
+     * 竣工资料确认日期
+     * date
      */
     private String jgzl;
 
     /**
-     * 竣工资料确认时间
-     * (监理）
+     * 监理资料提交日期
+     * date
      */
-    private Long jgzlqrsj;
-
-    /**
-     * 监理资料提交时间
-     * (监理)
-     */
-        private Long jlzltjsj;
-
-    /**
-     * 录入情况
-     */
-    private String lrqk;
+    private Long jlzltjsj;
 
     /**
      * 录入日期
+     * date
      */
     private Long lrrq;
 
     /**
-     * 施工合同采购订单号
+     * 录入情况
+     *
+     */
+    private String lrqk;
+
+    /**
+     * 施工采购订单号
+     *
      */
     private String sghtcgddh;
 
     /**
      * 验收日期
-     * 2015-04-21 加
+     * date
      */
     private Long ysrq;
 
     /**
-     * 转资情况
-     */
-    private String zzqk;
-
-    /**
      * 转资日期
+     * date
      */
     private Long zzrq;
 
     /**
+     * 转资情况
+     *
+     */
+    private String zzqk;
+
+    /**
      * 送审日期
-     * 2015-04-21 加
+     * date
      */
     private Long ssrq;
 
     /**
      * 送审情况
-     * 2015-04-21 加
+     * (未送审,审核中,审核通过)
      */
     private String ssqk;
 
     /**
      * 三方章确认日期
-     * 2015-04-21 加
+     * date
      */
-    private Long sfzqrrq;
-
-	/**
-     * 现场信息
-     */
-    private String xcxx;
+    private String sfzqrrq;
 
     /**
-     * 完工用时
-     * = 施工完工时间(AQ) - 单项委托时间(AJ)
+     * 完工用时(天)
+     *
      */
     private Integer wgys;
 
     /**
-     * 设计出版用时
-     * = 设计文本送交工程部日期(AC)-施工完工时间(AQ)
+     * 设计出版用时(天)
+     *
      */
     private Integer sjcbys;
 
     /**
-     * 竣工资料制作用时
-     * =  竣工资料确认日期（监理）(AV) -  Max(设计文本送交工程部日期(AE),施工完工时间(AR))
+     * 竣工资料用时(天)
+     *
      */
     private Integer jgzlzzys;
 
     /**
-     * 监理出版用时
-     * = 监理资料提交日期(AW) - 竣工资料确认日期（监理）(AV)
+     * 监理出版用时(天)
+     *
      */
     private Integer jlcbys;
 
     /**
-     * 录入用时
-     * = 录入时间(AX) -  监理资料提交日期(AW)
+     * 录入用时(天)
+     *
      */
     private Integer lrys;
 
     /**
-     * 移交资产用时
-     * = 验收日期(AZ) - 监理资料提交日期(AW)
+     * 移交资产用时(天)
+     *
      */
     private Integer yjzcys;
 
     /**
-     * 转资用时
-     * = 转资时间(BA) - 验收日期(AZ)
+     * 转资用时(天)
+     *
      */
     private Integer zzys;
 
     /**
-     * 送审用时
-     * = 送审时间（BB） - 监理资料提交日期(AW)
+     * 送审用时(天)
+     *
      */
     private Integer ssys;
 
     /**
-     * 审计用时
-     * = 三方章确认日期(BD) - 送审时间（BB）
+     * 审计用时(天)
+     *
      */
     private Integer sjys;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCsbh() {
         return csbh;
@@ -416,6 +454,14 @@ public class ChuanShuTJB{
 
     public void setCsbh(String csbh) {
         this.csbh = csbh;
+    }
+
+    public String getFence() {
+        return fence;
+    }
+
+    public void setFence(String fence) {
+        this.fence = fence;
     }
 
     public String getXmmc() {
@@ -432,30 +478,6 @@ public class ChuanShuTJB{
 
     public void setXmfzr(String xmfzr) {
         this.xmfzr = xmfzr;
-    }
-
-    public String getFence() {
-        return fence;
-    }
-
-    public void setFence(String fence) {
-        this.fence = fence;
-    }
-
-    public String getFenceOrder() {
-        return fenceOrder;
-    }
-
-    public void setFenceOrder(String fenceOrder) {
-        this.fenceOrder = fenceOrder;
-    }
-
-    public String getCeming() {
-        return ceming;
-    }
-
-    public void setCeming(String ceming) {
-        this.ceming = ceming;
     }
 
     public String getXmlb() {
@@ -658,6 +680,14 @@ public class ChuanShuTJB{
         this.sjwbsjgcbrq = sjwbsjgcbrq;
     }
 
+    public String getCeming() {
+        return ceming;
+    }
+
+    public void setCeming(String ceming) {
+        this.ceming = ceming;
+    }
+
     public String getSjsmbz() {
         return sjsmbz;
     }
@@ -688,6 +718,54 @@ public class ChuanShuTJB{
 
     public void setConstructionName(String constructionName) {
         this.constructionName = constructionName;
+    }
+
+    public String getDesignCompanyId() {
+        return designCompanyId;
+    }
+
+    public void setDesignCompanyId(String designCompanyId) {
+        this.designCompanyId = designCompanyId;
+    }
+
+    public String getSupervisionCompanyId() {
+        return supervisionCompanyId;
+    }
+
+    public void setSupervisionCompanyId(String supervisionCompanyId) {
+        this.supervisionCompanyId = supervisionCompanyId;
+    }
+
+    public String getConstructionCompanyId() {
+        return constructionCompanyId;
+    }
+
+    public void setConstructionCompanyId(String constructionCompanyId) {
+        this.constructionCompanyId = constructionCompanyId;
+    }
+
+    public String getDesignCompanyRefId() {
+        return designCompanyRefId;
+    }
+
+    public void setDesignCompanyRefId(String designCompanyRefId) {
+        this.designCompanyRefId = designCompanyRefId;
+    }
+
+    public String getSupervisionCompanyRefId() {
+        return supervisionCompanyRefId;
+    }
+
+    public void setSupervisionCompanyRefId(String supervisionCompanyRefId) {
+        this.supervisionCompanyRefId = supervisionCompanyRefId;
+    }
+
+    public String getConstructionCompanyRefId() {
+        return constructionCompanyRefId;
+    }
+
+    public void setConstructionCompanyRefId(String constructionCompanyRefId) {
+        this.constructionCompanyRefId = constructionCompanyRefId;
     }
 
     public Long getDxwtsj() {
@@ -746,14 +824,6 @@ public class ChuanShuTJB{
         this.yjwgsj = yjwgsj;
     }
 
-    public Long getKgrq() {
-        return kgrq;
-    }
-
-    public void setKgrq(Long kgrq) {
-        this.kgrq = kgrq;
-    }
-
     public Long getWgrq() {
         return wgrq;
     }
@@ -786,28 +856,12 @@ public class ChuanShuTJB{
         this.sgbz = sgbz;
     }
 
-    public String getGcjsqk() {
-        return gcjsqk;
-    }
-
-    public void setGcjsqk(String gcjsqk) {
-        this.gcjsqk = gcjsqk;
-    }
-
     public String getJgzl() {
         return jgzl;
     }
 
     public void setJgzl(String jgzl) {
         this.jgzl = jgzl;
-    }
-
-    public Long getJgzlqrsj() {
-        return jgzlqrsj;
-    }
-
-    public void setJgzlqrsj(Long jgzlqrsj) {
-        this.jgzlqrsj = jgzlqrsj;
     }
 
     public Long getJlzltjsj() {
@@ -818,20 +872,20 @@ public class ChuanShuTJB{
         this.jlzltjsj = jlzltjsj;
     }
 
-    public String getLrqk() {
-        return lrqk;
-    }
-
-    public void setLrqk(String lrqk) {
-        this.lrqk = lrqk;
-    }
-
     public Long getLrrq() {
         return lrrq;
     }
 
     public void setLrrq(Long lrrq) {
         this.lrrq = lrrq;
+    }
+
+    public String getLrqk() {
+        return lrqk;
+    }
+
+    public void setLrqk(String lrqk) {
+        this.lrqk = lrqk;
     }
 
     public String getSghtcgddh() {
@@ -850,20 +904,20 @@ public class ChuanShuTJB{
         this.ysrq = ysrq;
     }
 
-    public String getZzqk() {
-        return zzqk;
-    }
-
-    public void setZzqk(String zzqk) {
-        this.zzqk = zzqk;
-    }
-
     public Long getZzrq() {
         return zzrq;
     }
 
     public void setZzrq(Long zzrq) {
         this.zzrq = zzrq;
+    }
+
+    public String getZzqk() {
+        return zzqk;
+    }
+
+    public void setZzqk(String zzqk) {
+        this.zzqk = zzqk;
     }
 
     public Long getSsrq() {
@@ -882,20 +936,12 @@ public class ChuanShuTJB{
         this.ssqk = ssqk;
     }
 
-    public Long getSfzqrrq() {
+    public String getSfzqrrq() {
         return sfzqrrq;
     }
 
-    public void setSfzqrrq(Long sfzqrrq) {
+    public void setSfzqrrq(String sfzqrrq) {
         this.sfzqrrq = sfzqrrq;
-    }
-
-    public String getXcxx() {
-        return xcxx;
-    }
-
-    public void setXcxx(String xcxx) {
-        this.xcxx = xcxx;
     }
 
     public Integer getWgys() {

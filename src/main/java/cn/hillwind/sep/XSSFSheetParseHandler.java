@@ -81,7 +81,7 @@ class XSSFSheetParseHandler extends DefaultHandler {
             this.row = new Row();
             row.index = attributes.getValue("r");
 
-        } else if ("inlineStr".equals(name) || "v".equals(name)) {
+        } else if ("inlineStr".equals(name) || "v".equals(name) || "t".equals(name)) {
             vIsOpen = true;
             hasValue = true;
             // Clear contents cache
@@ -146,6 +146,8 @@ class XSSFSheetParseHandler extends DefaultHandler {
 
         String valueString;
 
+        // inlineStr 暂未实现，数据表示法: <c r="B2" t="inlineStr"><is><t>&#20256;&#36755;14-203-006</t></is></c>
+
         // v => contents of a cell
         if ("v".equals(name)) {
             // Process the value contents as required.
@@ -203,11 +205,17 @@ class XSSFSheetParseHandler extends DefaultHandler {
             cell.type = nextDataType;
             cell.value = valueString;
             row.add(cell);
+
+        } else if ("t".equals(name)) {
+            valueString = value.toString();
+            cell.type = nextDataType;
+            cell.value = valueString;
+            row.add(cell);
         } else if ("row".equals(name)) {
             rowHandler.process(getCurrentSheetName() ,row);
         }
 
-        if ("inlineStr".equals(name) || "v".equals(name)){
+        if ("inlineStr".equals(name) || "v".equals(name) || "t".equals(name)){
             vIsOpen = false;
         }
 

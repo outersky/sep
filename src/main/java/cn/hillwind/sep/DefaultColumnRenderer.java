@@ -42,18 +42,19 @@ public class DefaultColumnRenderer implements ColumnRenderer {
 
         switch (columnDesc.getDataFormat()){
             case date:
-                cell.setCellType(Cell.CELL_TYPE_NUMERIC);
 
-                if( value instanceof Long){
-                    if( (Long)value == 0L ){
+                if( value instanceof Long ){
+                    if( (Long)value <= 0L ){
                         break;
                     }
+                    cell.setCellType(Cell.CELL_TYPE_NUMERIC);
                     cell.setCellValue(new Date( (Long)value ));
+                    cell.setCellStyle(dateCellStyle);
                 }else if(value instanceof Date){
+                    cell.setCellType(Cell.CELL_TYPE_NUMERIC);
                     cell.setCellValue((Date)value);
+                    cell.setCellStyle(dateCellStyle);
                 }
-
-                cell.setCellStyle(dateCellStyle);
                 break;
 
             case number:
